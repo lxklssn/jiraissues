@@ -32,11 +32,12 @@ pluginBundle {
     vcsUrl = 'https://github.com/acetous/gradle-require-dependency-compliance.git'
 
     plugins {
-        simplePlugin {
+        jiraissues {
             id = 'de.lxklssn.jiraissues'
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
-            version = projectVersion
+            tags = ['jira','asciidoc']
+            version = '1.0.0-rc'
         }
     }
 }
