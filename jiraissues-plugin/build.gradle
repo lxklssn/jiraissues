@@ -1,10 +1,9 @@
-apply plugin: 'groovy'
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'java-gradle-plugin'
-
-group 'de.lxklssn'
-version '1.0-SNAPSHOT'
+plugins {
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.9.10'
+    id 'groovy'
+}
 
 sourceCompatibility = 1.8
 
@@ -16,24 +15,35 @@ wrapper {
 gradlePlugin {
     plugins {
         simplePlugin {
-            id = 'jiraissues'
+            id = 'de.lxklssn.jiraissues'
             implementationClass = 'de.lxklssn.jira.JiraIssuesPlugin'
         }
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+ext {
+    projectVersion = version
+}
+version = '1.0.0-rc'
+group 'de.lxklssn'
+
+pluginBundle {
+    website = 'https://github.com/lxklssn/jiraissues'
+    vcsUrl = 'https://github.com/acetous/gradle-require-dependency-compliance.git'
+
+    plugins {
+        simplePlugin {
+            id = 'de.lxklssn.jiraissues'
+            displayName = 'Gradle Jira Issues Plugin'
+            description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
+            version = projectVersion
         }
     }
 }
 
 
 repositories {
-    mavenLocal()
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
