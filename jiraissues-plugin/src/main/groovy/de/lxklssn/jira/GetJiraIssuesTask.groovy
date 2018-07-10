@@ -22,6 +22,7 @@ class GetJiraIssuesTask extends DefaultTask {
     final Property<String> filePath = project.objects.property(String);
     @Input
     final Property<String> jiraBaseUrl = project.objects.property(String);
+
     @TaskAction
     public void get() {
         SnippetFileCreator snippetFileCreator = new SnippetFileCreator(filePath.get());
