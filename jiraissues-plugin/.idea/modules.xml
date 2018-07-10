@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jiraissues.iml" filepath="$PROJECT_DIR$/jiraissues.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jiraissues.iml" filepath="$PROJECT_DIR$/.idea/modules/jiraissues.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jiraissues_main.iml" filepath="$PROJECT_DIR$/.idea/modules/jiraissues_main.iml" group="jiraissues" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jiraissues_test.iml" filepath="$PROJECT_DIR$/.idea/modules/jiraissues_test.iml" group="jiraissues" />
     </modules>

@@ -1,6 +1,10 @@
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 apply plugin: 'java-gradle-plugin'
+
+group 'de.lxklssn'
+version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -12,14 +16,23 @@ wrapper {
 gradlePlugin {
     plugins {
         simplePlugin {
-            id = 'jiraIssues'
-            implementationClass = 'jira.JiraIssuesPlugin'
+            id = 'jiraissues'
+            implementationClass = 'de.lxklssn.jira.JiraIssuesPlugin'
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
         }
     }
 }
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
