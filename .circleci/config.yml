@@ -13,8 +13,9 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "jiraissues-plugin/build.gradle" }}
       - run:
-          command: sudo chmod +x gradlew
-          command: ./gradlew resolveDependencies
+          command: |
+            sudo chmod +x gradlew
+            ./gradlew androidDependencies 
           working_directory: jiraissues-plugin
       - save_cache:
           paths:
