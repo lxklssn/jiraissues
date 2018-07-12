@@ -67,6 +67,3 @@ workflows:
       - deploy:
           requires:
             - hold
-      - sonarqube:
-          requires:
-            - build
