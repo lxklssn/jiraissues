@@ -15,7 +15,7 @@ jobs:
       - run:
           command: |
             sudo chmod +x gradlew
-            ./gradlew resolveDependencies
+            ./gradlew dependencies
           working_directory: jiraissues-plugin
       - save_cache:
           paths:
