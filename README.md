@@ -29,6 +29,6 @@ This is a project which uses the plugin. The plugin is included in this build in
 Run your manual tests here. You can change the sandbox project to demonstrate new features.
 
 ```
-> cd jiraissues-plugin-sandboxa
+> cd jiraissues-plugin-sandbox
 > gradlew getIssues
 ```

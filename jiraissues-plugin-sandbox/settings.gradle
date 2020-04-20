@@ -1,2 +1,3 @@
 rootProject.name = 'jiraissues-plugin-sandbox'
 
+includeBuild '../jiraissues-plugin'
