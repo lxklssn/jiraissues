@@ -37,7 +37,7 @@ pluginBundle {
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
             tags = ['jira','asciidoc']
-            version = '1.0.3'
+            version = '1.0.4'
         }
     }
 }
@@ -52,5 +52,3 @@ dependencies {
     implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
-
-
