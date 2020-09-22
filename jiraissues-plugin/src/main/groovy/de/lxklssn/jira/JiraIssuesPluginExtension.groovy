@@ -17,10 +17,10 @@ class JiraIssuesPluginExtension {
     JiraIssuesPluginExtension(Project project) {
         jiraUsername = project.objects.property(String)
         jiraPassword = project.objects.property(String)
-        filePath = project.objects.property(String)
+        filePath = project.objects.property(String).value("build/jira-issues")
         jiraBaseUrl = project.objects.property(String)
         jiraVersions = project.objects.listProperty(String)
         jql = project.objects.property(String)
-        fileName = project.objects.property(String)
+        fileName = project.objects.property(String).value("issues.adoc")
     }
 }

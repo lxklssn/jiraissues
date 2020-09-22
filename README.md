@@ -15,7 +15,7 @@ plugins {
 }
 
 getIssues {
-    filePath = "build/changelog"
+    filePath = "build/jira-issues"
     fileName = "issues.adoc"
 
     jiraUsername = "admin"
