@@ -45,5 +45,15 @@ repositories {
 dependencies {
     implementation 'org.codehaus.groovy:groovy-all:2.5.8'
     implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core:3.13.1'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
