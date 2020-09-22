@@ -9,9 +9,20 @@ Include this plugin in your project. Visit this
 [plugin's page on plugins.gradle.org](https://plugins.gradle.org/plugin/de.lxklssn.jiraissues) 
 for more information. 
 
-```
+```gradle
 plugins {
-  id "de.lxklssn.jiraissues" version "1.0.3"
+  id "de.lxklssn.jiraissues" version "1.0.4"
+}
+
+getIssues {
+    filePath = "build/changelog"
+
+    jiraUsername = "admin"
+    jiraPassword = "admin"
+    jiraBaseUrl = "http://www.jirabase.com"
+
+    jiraVersions = ["Version 1.2.1"]
+    jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED)"
 }
 ```
 

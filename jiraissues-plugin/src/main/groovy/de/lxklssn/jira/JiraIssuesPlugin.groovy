@@ -15,6 +15,7 @@ class JiraIssuesPlugin implements Plugin<Project> {
             filePath = extension.filePath
             jiraBaseUrl = extension.jiraBaseUrl
             jql = extension.jql
+            jiraVersions = extension.jiraVersions
         }
     }
 
