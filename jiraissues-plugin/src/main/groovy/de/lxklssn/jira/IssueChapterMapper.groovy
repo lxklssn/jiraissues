@@ -2,21 +2,21 @@ package de.lxklssn.jira
 
 class IssueChapterMapper {
 
-    final String baseUrl;
+    final String baseUrl
 
     IssueChapterMapper(String baseUrl) {
         this.baseUrl = baseUrl
     }
 
     IssueChapter map(List issues) {
-        IssueChapter issueChapter = new IssueChapter();
-        List issueEntries = new ArrayList();
+        IssueChapter issueChapter = new IssueChapter()
+        List issueEntries = new ArrayList()
         issues.each {
-            issueEntries.add(createIssueEntry(it.key, it.fields.summary));
+            issueEntries.add(createIssueEntry(it.key, it.fields.summary))
         }
-        issueChapter.setIssues(issueEntries);
+        issueChapter.setIssues(issueEntries)
 
-        return issueChapter;
+        return issueChapter
     }
 
     String createIssueEntry(String ticketKey, String ticketSummary) {

@@ -6,13 +6,13 @@ import org.gradle.api.provider.Property
 
 class JiraIssuesPluginExtension {
 
-    Property<String> jql;
-    ListProperty<String> jiraVersions;
-    Property<String> jiraUsername;
-    Property<String> jiraPassword;
-    Property<String> filePath;
-    Property<String> jiraBaseUrl;
-    Property<String> fileName;
+    Property<String> jql
+    ListProperty<String> jiraVersions
+    Property<String> jiraUsername
+    Property<String> jiraPassword
+    Property<String> filePath
+    Property<String> jiraBaseUrl
+    Property<String> fileName
 
     JiraIssuesPluginExtension(Project project) {
         jiraUsername = project.objects.property(String)
