@@ -19,7 +19,7 @@ gradlePlugin {
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
             implementationClass = 'de.lxklssn.jira.JiraIssuesPlugin'
-            version = '1.0.4'
+            version = '1.0.5'
 
         }
     }
@@ -28,7 +28,7 @@ gradlePlugin {
 ext {
     projectVersion = version
 }
-version = '1.0.4'
+version = '1.0.5'
 group 'de.lxklssn'
 
 pluginBundle {
