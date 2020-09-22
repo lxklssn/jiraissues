@@ -11,7 +11,7 @@ class GetJiraIssuesTask extends DefaultTask {
     private static final String ISSUES = "issues"
 
     @Input
-    final Property<String> jiraProjects = project.objects.property(String);
+    final Property<String> jql = project.objects.property(String);
     @Input
     final Property<String> jiraVersions = project.objects.property(String);
     @Input
@@ -27,9 +27,10 @@ class GetJiraIssuesTask extends DefaultTask {
     public void get() {
         SnippetFileCreator snippetFileCreator = new SnippetFileCreator(filePath.get());
         IssueChapterMapper issueChapterMapper = new IssueChapterMapper(jiraBaseUrl.get() + "/browse/");
-        JiraRESTClient jiraRESTClient = new JiraRESTClient(jiraBaseUrl.get() + "/rest/api/2/" , jiraUsername.get(), jiraPassword.get(), jiraProjects.get().split(','))
+        JiraRESTClient jiraRESTClient = new JiraRESTClient(jiraBaseUrl.get() + "/rest/api/2/", jiraUsername.get(), jiraPassword.get())
+
         jiraVersions.get().split(',').each { jiraVersion ->
-            def issuesResponse = jiraRESTClient.getIssues(jiraVersion)
+            def issuesResponse = jiraRESTClient.getIssues(jql.get())
             List issues = issuesResponse.properties.get(DATA).getAt(ISSUES) as List;
             snippetFileCreator.createIssueSnippet(jiraVersion, issueChapterMapper.map(issues));
         }

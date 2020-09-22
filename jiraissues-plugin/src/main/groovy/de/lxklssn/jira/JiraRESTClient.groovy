@@ -6,20 +6,17 @@ import org.apache.http.conn.scheme.Scheme
 
 import javax.net.ssl.SSLContext
 
-import static de.lxklssn.jira.JiraStatus.*
-
 class JiraRESTClient extends RESTClient {
 
     private static final String HTTPS = "https"
     private static final int HTTPS_PORT = 443
     private static final String TLS = "TLS"
-    private final String[] projects;
 
     private String username
     private String password
     private def credentials = [:]
 
-    JiraRESTClient(String url, String username, String password, String... projects) {
+    JiraRESTClient(String url, String username, String password) {
         super(url)
         getClient().getConnectionManager().getSchemeRegistry().register(new Scheme(HTTPS, HTTPS_PORT, createTLSSocketFactory()))
 
@@ -28,7 +25,6 @@ class JiraRESTClient extends RESTClient {
 
         credentials['os_username'] = this.username
         credentials['os_password'] = this.password
-        this.projects = projects
     }
 
     private TLSSocketFactory createTLSSocketFactory() {
@@ -77,11 +73,7 @@ class JiraRESTClient extends RESTClient {
         return get("search", query)
     }
 
-    def getIssues(String fixVersion) {
-        String jql = new JiraQueryBuilder(projects)
-                .withFixVersion(fixVersion)
-                .withStatus(DEV_TEST, AUTHOR_TEST, CLOSED, READY_FOR_DEPLOYMENT)
-                .build()
+    def getIssues(String jql) {
         return search(jql)
     }
 }
