@@ -12,6 +12,7 @@ class JiraIssuesPluginExtension {
     Property<String> jiraPassword;
     Property<String> filePath;
     Property<String> jiraBaseUrl;
+    Property<String> fileName;
 
     JiraIssuesPluginExtension(Project project) {
         jiraUsername = project.objects.property(String)
@@ -20,5 +21,6 @@ class JiraIssuesPluginExtension {
         jiraBaseUrl = project.objects.property(String)
         jiraVersions = project.objects.listProperty(String)
         jql = project.objects.property(String)
+        fileName = project.objects.property(String)
     }
 }
