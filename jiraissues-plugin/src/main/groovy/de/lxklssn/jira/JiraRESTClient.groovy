@@ -73,7 +73,7 @@ class JiraRESTClient extends RESTClient {
         return get("search", query)
     }
 
-    def getIssues(String jql) {
-        return search(jql)
+    def getIssues(String jiraVersion, String jql) {
+        return search(jql + " AND fixVersion = '${jiraVersion}'")
     }
 }

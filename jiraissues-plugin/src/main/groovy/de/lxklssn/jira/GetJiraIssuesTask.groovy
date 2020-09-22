@@ -33,7 +33,7 @@ class GetJiraIssuesTask extends DefaultTask {
         JiraRESTClient jiraRESTClient = new JiraRESTClient(jiraBaseUrl.get() + "/rest/api/2/", jiraUsername.get(), jiraPassword.get())
 
         jiraVersions.get().each { jiraVersion ->
-            def issuesResponse = jiraRESTClient.getIssues(jql.get())
+            def issuesResponse = jiraRESTClient.getIssues(jiraVersion, jql.get())
             List issues = issuesResponse.properties.get(DATA).getAt(ISSUES) as List
             snippetFileCreator.createIssueSnippet(jiraVersion, issueChapterMapper.map(issues))
         }
