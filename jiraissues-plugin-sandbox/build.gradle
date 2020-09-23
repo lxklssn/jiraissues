@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'de.lxklssn:jiraissues:1.0.0-rc'
+        classpath 'de.lxklssn:jiraissues:1.0.5'
     }
 }
 
@@ -25,12 +25,14 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-jiraissues {
+getIssues {
+    filePath = "build/changelog"
+    fileName = "issues.adoc"
+
     jiraUsername = "admin"
     jiraPassword = "admin"
-    filePath = "/basePath/"
     jiraBaseUrl = "http://www.jirabase.com"
-    jiraVersions = "5.10"
-    jiraProjects = "project"
 
+    jiraVersions = ["Version 1.2.1"]
+    jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED)"
 }

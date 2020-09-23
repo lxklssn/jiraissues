@@ -19,7 +19,7 @@ gradlePlugin {
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
             implementationClass = 'de.lxklssn.jira.JiraIssuesPlugin'
-            version = '1.0.4'
+            version = '1.0.5'
 
         }
     }
@@ -28,12 +28,12 @@ gradlePlugin {
 ext {
     projectVersion = version
 }
-version = '1.0.4'
+version = '1.0.5'
 group 'de.lxklssn'
 
 pluginBundle {
     website = 'https://github.com/lxklssn/jiraissues'
-    vcsUrl = 'https://github.com/acetous/gradle-require-dependency-compliance.git'
+    vcsUrl = 'https://github.com/lxklssn/jiraissues.git'
     tags = ['jira','asciidoc']
 }
 
@@ -45,5 +45,15 @@ repositories {
 dependencies {
     implementation 'org.codehaus.groovy:groovy-all:2.5.8'
     implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core:3.13.1'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }

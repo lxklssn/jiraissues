@@ -4,12 +4,12 @@ class SnippetFileCreator {
 
     private static final String UTF8 = 'UTF8'
 
-    private static final String ISSUES_FILE_NAME = "/issues.adoc"
-
     private String filePath
+    private String fileName
 
-    SnippetFileCreator(String filePath) {
+    SnippetFileCreator(String filePath, String fileName) {
         this.filePath = filePath
+        this.fileName = fileName
     }
 
     void createIssueSnippet(String version, IssueChapter issueChapter) {
@@ -21,7 +21,7 @@ class SnippetFileCreator {
             folder.mkdirs()
         }
 
-        File file = new File(path + ISSUES_FILE_NAME)
+        File file = new File(path + "/" + fileName)
         String fileContent = ''
 
         issueChapter.getIssues().each { issue ->

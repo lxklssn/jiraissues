@@ -10,12 +10,13 @@ class JiraIssuesPlugin implements Plugin<Project> {
         def extension = project.extensions.create('jiraissues', JiraIssuesPluginExtension, project)
         project.tasks.create("getIssues", GetJiraIssuesTask) {
 
+            fileName = extension.fileName
             jiraUsername = extension.jiraUsername
             jiraPassword = extension.jiraPassword
             filePath = extension.filePath
             jiraBaseUrl = extension.jiraBaseUrl
+            jql = extension.jql
             jiraVersions = extension.jiraVersions
-            jiraProjects = extension.jiraProjects
         }
     }
 
