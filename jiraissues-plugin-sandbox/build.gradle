@@ -1,19 +1,9 @@
-group 'de.lxklssn'
-version '1.0-SNAPSHOT'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'de.lxklssn:jiraissues:1.0.5'
-    }
+plugins {
+    id "de.lxklssn.jiraissues" version "2.0.0"
 }
 
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'de.lxklssn.jiraissues'
+group 'de.lxklssn'
+version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -21,18 +11,24 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
-
-getIssues {
+jiraIssues {
     filePath = "build/changelog"
     fileName = "issues.adoc"
 
+    jiraBaseUrl = "http://www.jirabase.com"
     jiraUsername = "admin"
     jiraPassword = "admin"
-    jiraBaseUrl = "http://www.jirabase.com"
 
-    jiraVersions = ["Version 1.2.1"]
-    jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED)"
+    jiraVersions = ["Version 1.2.1", "Version 1.2.2"]
+}
+
+jiraQueries {
+    changeRequests {
+        fileName = "change-requests.adoc"
+        jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED) and type = ChangeRequest"
+    }
+    bugs {
+        fileName = "bugs.adoc"
+        jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED) and type = Bug"
+    }
 }

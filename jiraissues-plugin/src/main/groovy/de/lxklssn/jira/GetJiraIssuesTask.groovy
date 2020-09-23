@@ -27,7 +27,7 @@ class GetJiraIssuesTask extends DefaultTask {
     final Property<String> jiraBaseUrl = project.objects.property(String)
 
     @TaskAction
-    public void get() {
+    void get() {
         SnippetFileCreator snippetFileCreator = new SnippetFileCreator(filePath.get(), fileName.get())
         IssueChapterMapper issueChapterMapper = new IssueChapterMapper(jiraBaseUrl.get() + "/browse/")
         JiraRESTClient jiraRESTClient = new JiraRESTClient(jiraBaseUrl.get() + "/rest/api/2/", jiraUsername.get(), jiraPassword.get())
