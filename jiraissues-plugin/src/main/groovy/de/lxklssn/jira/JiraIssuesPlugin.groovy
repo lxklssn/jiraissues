@@ -31,7 +31,7 @@ class JiraIssuesPlugin implements Plugin<Project> {
                     getJiraUsername().set(extension.jiraUsername)
                     getJiraPassword().set(extension.jiraPassword)
 
-                    getJiraVersions().set(extension.jiraVersions)
+                    getFixVersions().set(extension.fixVersions)
                     getFilePath().set(extension.filePath)
 
                     getFileName().set(query.fileName)

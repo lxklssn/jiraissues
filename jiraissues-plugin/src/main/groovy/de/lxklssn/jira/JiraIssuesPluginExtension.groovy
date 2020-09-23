@@ -13,7 +13,7 @@ class JiraIssuesPluginExtension {
     Property<String> jiraUsername
     Property<String> jiraPassword
 
-    ListProperty<String> jiraVersions
+    ListProperty<String> fixVersions
 
     JiraIssuesPluginExtension(Project project) {
         filePath = project.objects.property(String).value("build/jira-issues")
@@ -22,6 +22,6 @@ class JiraIssuesPluginExtension {
         jiraUsername = project.objects.property(String)
         jiraPassword = project.objects.property(String)
 
-        jiraVersions = project.objects.listProperty(String)
+        fixVersions = project.objects.listProperty(String)
     }
 }

@@ -19,7 +19,7 @@ jiraIssues {
     jiraUsername = "admin"
     jiraPassword = "admin"
 
-    jiraVersions = ["Version 1.2.1", "Version 1.2.2"]
+    fixVersions = ["Version 1.2.1", "Version 1.2.2"]
 }
 
 jiraQueries {
