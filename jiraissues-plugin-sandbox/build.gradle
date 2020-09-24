@@ -5,15 +5,12 @@ plugins {
 group 'de.lxklssn'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
 
 jiraIssues {
     filePath = "build/changelog"
-    fileName = "issues.adoc"
 
     jiraBaseUrl = "http://www.jirabase.com"
     jiraUsername = "admin"
