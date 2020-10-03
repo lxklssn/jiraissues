@@ -11,21 +11,30 @@ for more information.
 
 ```gradle
 plugins {
-  id "de.lxklssn.jiraissues" version "1.0.5"
+  id "de.lxklssn.jiraissues" version "2.0.0"
 }
 
-getIssues {
-    filePath = "build/jira-issues"
-    fileName = "issues.adoc"
-
+jiraIssues {
+    jiraBaseUrl = "http://www.jirabase.com"
     jiraUsername = "admin"
     jiraPassword = "admin"
-    jiraBaseUrl = "http://www.jirabase.com"
 
-    jiraVersions = ["Version 1.2.1"]
-    jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED)"
+    fixVersions = ["Version 1.2.1", "Version 1.2.2"]
+}
+
+jiraQueries {
+    changeRequests {
+        fileName = "change-requests.adoc"
+        jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED) and type = ChangeRequest"
+    }
+    bugs {
+        fileName = "bugs.adoc"
+        jql = "project in ('MY_PROJECT_KEY') and status in (CLOSED) and type = Bug"
+    }
 }
 ```
+
+Each query configuration will create a task namend `getChangelogFor<QueryName>`.
 
 ## Contributing
 

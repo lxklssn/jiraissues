@@ -3,21 +3,27 @@ package de.lxklssn.jira
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.apache.http.conn.scheme.Scheme
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import javax.net.ssl.SSLContext
 
 class JiraRESTClient extends RESTClient {
 
+    private static Logger LOG = LoggerFactory.getLogger(JiraRESTClient)
+
     private static final String HTTPS = "https"
     private static final int HTTPS_PORT = 443
     private static final String TLS = "TLS"
 
+    private String url;
     private String username
     private String password
     private def credentials = [:]
 
     JiraRESTClient(String url, String username, String password) {
         super(url)
+        this.url = url
         getClient().getConnectionManager().getSchemeRegistry().register(new Scheme(HTTPS, HTTPS_PORT, createTLSSocketFactory()))
 
         this.username = username
@@ -74,6 +80,8 @@ class JiraRESTClient extends RESTClient {
     }
 
     def getIssues(String jiraVersion, String jql) {
-        return search(jql + " AND fixVersion = '${jiraVersion}'")
+        jql += " AND fixVersion in ('${jiraVersion}')"
+        LOG.debug("Querying JIRA server '{}' using JQL '{}'", this.url, jql)
+        return search(jql)
     }
 }
