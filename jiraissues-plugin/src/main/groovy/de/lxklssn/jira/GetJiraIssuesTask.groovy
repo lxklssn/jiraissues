@@ -8,9 +8,6 @@ import org.gradle.api.tasks.TaskAction
 
 class GetJiraIssuesTask extends DefaultTask {
 
-    private static final String DATA = "data"
-    private static final String ISSUES = "issues"
-
     @Input
     final Property<String> jql = project.objects.property(String)
     @Input
@@ -33,8 +30,7 @@ class GetJiraIssuesTask extends DefaultTask {
         JiraRESTClient jiraRESTClient = new JiraRESTClient(jiraBaseUrl.get() + "/rest/api/2/", jiraUsername.get(), jiraPassword.get())
 
         fixVersions.get().each { fixVersion ->
-            def issuesResponse = jiraRESTClient.getIssues(fixVersion, jql.get())
-            List issues = issuesResponse.properties.get(DATA).getAt(ISSUES) as List
+            List issues = jiraRESTClient.getIssues(fixVersion, jql.get())
             snippetFileCreator.createIssueSnippet(fixVersion, issueChapterMapper.map(issues))
         }
     }

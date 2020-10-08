@@ -16,7 +16,10 @@ class JiraRESTClient extends RESTClient {
     private static final int HTTPS_PORT = 443
     private static final String TLS = "TLS"
 
-    private String url;
+    private static final String DATA = "data"
+    private static final String ISSUES = "issues"
+
+    private String url
     private String username
     private String password
     private def credentials = [:]
@@ -67,19 +70,38 @@ class JiraRESTClient extends RESTClient {
         }
     }
 
-    private def search(String jql) {
+    private List search(String jql) {
+        return searchPaginated(jql, new ArrayList(), 0, 0)
+    }
 
+    private List searchPaginated(String jql, List allIssues, int startAtIssue, int totalResultsSoFar) {
         def query = [:]
         query << credentials
         query['jql'] = jql
 
-        query['startAt'] = 0
+        query['startAt'] = startAtIssue
         query['maxResults'] = 50
 
-        return get("search", query)
+        def issuesResponse = get("search", query)
+        def responseData = issuesResponse.getProperties().get(DATA)
+
+        List newIssues = responseData.getAt(ISSUES) as List
+
+        Integer maxResults = responseData.getAt("maxResults")
+        Integer totalResults = responseData.getAt("total")
+
+        totalResultsSoFar += newIssues.size()
+        allIssues.addAll(newIssues)
+
+        if (totalResultsSoFar < totalResults) {
+            startAtIssue += maxResults
+            searchPaginated(jql, allIssues, startAtIssue, totalResultsSoFar)
+        }
+
+        return allIssues
     }
 
-    def getIssues(String jiraVersion, String jql) {
+    List getIssues(String jiraVersion, String jql) {
         jql += " AND fixVersion in ('${jiraVersion}')"
         LOG.debug("Querying JIRA server '{}' using JQL '{}'", this.url, jql)
         return search(jql)
