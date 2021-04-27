@@ -85,10 +85,10 @@ class JiraRESTClient extends RESTClient {
         def issuesResponse = get("search", query)
         def responseData = issuesResponse.getProperties().get(DATA)
 
-        List newIssues = responseData.getAt(ISSUES) as List
+        def newIssues = responseData.getAt(ISSUES) as List
 
-        Integer maxResults = responseData.getAt("maxResults")
-        Integer totalResults = responseData.getAt("total")
+        def maxResults = responseData.getAt("maxResults")
+        def totalResults = responseData.getAt("total")
 
         totalResultsSoFar += newIssues.size()
         allIssues.addAll(newIssues)
