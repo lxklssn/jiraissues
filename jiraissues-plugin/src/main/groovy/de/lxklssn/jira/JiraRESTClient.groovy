@@ -22,7 +22,6 @@ class JiraRESTClient extends RESTClient {
     private String url
     private String username
     private String password
-    private def credentials = [:]
 
     JiraRESTClient(String url, String username, String password) {
         super(url)
@@ -31,9 +30,6 @@ class JiraRESTClient extends RESTClient {
 
         this.username = username
         this.password = password
-
-        credentials['os_username'] = this.username
-        credentials['os_password'] = this.password
     }
 
     private TLSSocketFactory createTLSSocketFactory() {
@@ -43,27 +39,12 @@ class JiraRESTClient extends RESTClient {
     }
 
     private def get(String path, def query) {
-
         try {
-            def response = get(path: path, contentType: "application/json", query: query)
-            return response
+            def basicAuthCredentials = "$username:$password".bytes.encodeBase64().toString()
+            return get(path: path, contentType: "application/json", query: query, headers: [Authorization: "Basic $basicAuthCredentials"])
         } catch (HttpResponseException e) {
             if (e.response.status == 400) {
                 throw new IllegalArgumentException("JIRA query failed, response data=${e.response.data}", e)
-            } else {
-                throw new IOException("JIRA connection failed, got HTTP status ${e.response.status}, response data=${e.response.data}", e)
-            }
-        }
-    }
-
-    private def post(String path, def body, def query) {
-
-        try {
-            def response = post(path: path, contentType: "application/json", body: body, query: query)
-            return response
-        } catch (HttpResponseException e) {
-            if (e.response.status == 400) {
-                throw new IllegalArgumentException("JIRA query failed, got HTTP status 400, response data=${e.response.data}", e)
             } else {
                 throw new IOException("JIRA connection failed, got HTTP status ${e.response.status}, response data=${e.response.data}", e)
             }
@@ -76,7 +57,6 @@ class JiraRESTClient extends RESTClient {
 
     private List searchPaginated(String jql, List allIssues, int startAtIssue, int totalResultsSoFar) {
         def query = [:]
-        query << credentials
         query['jql'] = jql
 
         query['startAt'] = startAtIssue
