@@ -11,7 +11,7 @@ for more information.
 
 ```gradle
 plugins {
-  id "de.lxklssn.jiraissues" version "2.0.0"
+  id "de.lxklssn.jiraissues" version "2.2.0"
 }
 
 jiraIssues {
