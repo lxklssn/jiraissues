@@ -1,21 +1,21 @@
 plugins {
-    id 'java'
     id 'java-gradle-plugin'
-    id 'com.gradle.plugin-publish' version '0.11.0'
+    id 'com.gradle.plugin-publish' version '0.18.0'
     id 'groovy'
     id 'maven-publish'
 }
 
-sourceCompatibility = 1.8
+repositories {
+    mavenCentral()
+}
 
-wrapper {
-    gradleVersion '6.3'
-    distributionType Wrapper.DistributionType.ALL
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 gradlePlugin {
     plugins {
-        simplePlugin {
+        jiraIssues {
             id = 'de.lxklssn.jiraissues'
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
@@ -24,29 +24,21 @@ gradlePlugin {
     }
 }
 
-ext {
-    projectVersion = version
-}
 version = '2.2.0'
 group 'de.lxklssn'
 
 pluginBundle {
     website = 'https://github.com/lxklssn/jiraissues'
     vcsUrl = 'https://github.com/lxklssn/jiraissues.git'
-    tags = ['jira','asciidoc']
-}
-
-
-repositories {
-    jcenter()
+    tags = ['jira', 'asciidoc']
 }
 
 dependencies {
-    implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
+    implementation 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
 
-    testImplementation platform('org.junit:junit-bom:5.7.0')
+    testImplementation platform('org.junit:junit-bom:5.8.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'org.assertj:assertj-core:3.13.1'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
 }
 
 test {
