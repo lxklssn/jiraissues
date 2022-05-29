@@ -51,5 +51,5 @@ Run your manual tests here. You can change the sandbox project to demonstrate ne
 
 ```
 > cd jiraissues-plugin-sandbox
-> gradlew getIssues
+> gradlew getChangelogForBugs
 ```
