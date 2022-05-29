@@ -20,8 +20,6 @@ gradlePlugin {
             displayName = 'Gradle Jira Issues Plugin'
             description = 'A Gradle plugin to get jira issues in a formatted snippet file for use with asciidoc.'
             implementationClass = 'de.lxklssn.jira.JiraIssuesPlugin'
-            version = '2.0.0'
-
         }
     }
 }
@@ -35,7 +33,7 @@ group 'de.lxklssn'
 pluginBundle {
     website = 'https://github.com/lxklssn/jiraissues'
     vcsUrl = 'https://github.com/lxklssn/jiraissues.git'
-    tags = ['jira','asciidoc']
+    tags = ['jira', 'asciidoc']
 }
 
 
@@ -44,7 +42,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
     implementation group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
 
     testImplementation platform('org.junit:junit-bom:5.7.0')
